@@ -1,5 +1,13 @@
 export class Door {
 	processEvents(events: string): string {
-		return "0";
+		return events
+			.split('')
+			.map((event) => {
+				if (event === 'P') {
+					return '1';
+				}
+				return '0';
+			})
+			.join('');
 	}
 }
