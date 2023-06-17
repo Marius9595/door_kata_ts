@@ -34,5 +34,9 @@ describe('door', () => {
 	it('should start close since button was pressed', function () {
 		expect(new Door().processEvents(".P.....P...")).toBe("01234554321");
 	});
+
+	it('should be closed after 5 seconds since button was pressed', function () {
+		expect(new Door().processEvents(".P.....P.....")).toBe("0123455432100");
+	});
 });
 
