@@ -3,7 +3,7 @@
 	CASES:
 	 - door is closed at the beginning ✅
 	 - door will star open when the button is pressed ✅
-	 - door needs 5 seconds to open
+	 - door needs 5 seconds to open ✅
 	 - door will close when the button is pressed again
 	 - door needs 5 seconds to close
 	 - door will be paused when button is pressed during opening
