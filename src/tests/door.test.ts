@@ -23,7 +23,16 @@ describe('door', () => {
 		expect(new Door().processEvents(".P")).toBe("01");
 	});
 
+	it('should start open when button was pressed', function () {
+		expect(new Door().processEvents(".P...")).toBe("01234");
+	});
+
 	it('should be open after 5 seconds since button was pressed', function () {
 		expect(new Door().processEvents(".P.....")).toBe("0123455");
 	});
+
+	it('should start close since button was pressed', function () {
+		expect(new Door().processEvents(".P.....P...")).toBe("01234554321");
+	});
 });
+
