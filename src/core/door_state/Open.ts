@@ -1,5 +1,7 @@
 import { DoorState } from './DoorState';
 import { Door } from '../door';
+import { Closed } from './Closed';
+import { Closing } from './Closing';
 
 export class Open implements DoorState {
 	constructor(private door: Door) {}
@@ -11,8 +13,13 @@ export class Open implements DoorState {
 		let eventsInProcessing = procceedEvents;
 		if (!eventsToProcess.includes('P')) {
 			eventsInProcessing += eventsToProcess.replace('.', '5');
+			return eventsInProcessing;
 		}
 
-		return eventsInProcessing;
+		const indexOfButtonWasPressed = eventsToProcess.indexOf('P');
+		eventsInProcessing += eventsToProcess.slice(0, indexOfButtonWasPressed).replace('.', '5');
+
+		this.door.changeState(new Closing(this.door));
+		return this.door.processEvents(eventsInProcessing + eventsToProcess.slice(indexOfButtonWasPressed));
 	}
 }
