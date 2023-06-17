@@ -5,7 +5,7 @@
 	 - door will star open when the button is pressed ✅
 	 - door needs 5 seconds to open ✅
 	 - door will close when the button is pressed again ✅
-	 - door needs 5 seconds to close
+	 - door needs 5 seconds to close ✅
 	 - door will be paused when button is pressed during opening
 	 - door will be paused when button is pressed during closing
 	 - door will continue when button is pressed again
@@ -37,6 +37,10 @@ describe('door', () => {
 
 	it('should be closed after 5 seconds since button was pressed', function () {
 		expect(new Door().processEvents(".P.....P.....")).toBe("0123455432100");
+	});
+
+	it('should be stay paused when is opening and button is pressed', function () {
+		expect(new Door().processEvents(".P.P.")).toBe("01222");
 	});
 });
 
