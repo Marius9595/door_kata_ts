@@ -14,8 +14,10 @@
 	 - door will change his direction when detecting an obstacle
 */
 
-describe('door', () => {
-	it('should start', function () {
+import { Door } from "../core/door";
 
+describe('door', () => {
+	it('should start closed', function () {
+		expect(new Door().processEvents(".")).toBe("0");
 	});
 });
