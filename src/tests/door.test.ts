@@ -1,7 +1,7 @@
 
 /*
 	CASES:
-	 - door is closed at the beginning
+	 - door is closed at the beginning ✅
 	 - door will star open when the button is pressed
 	 - door needs 5 seconds to open
 	 - door stays open after 5 seconds
@@ -19,5 +19,9 @@ import { Door } from "../core/door";
 describe('door', () => {
 	it('should start closed', function () {
 		expect(new Door().processEvents(".")).toBe("0");
+	});
+
+	it('should star open when the button is pressed', function () {
+		expect(new Door().processEvents(".P")).toBe("01");
 	});
 });
