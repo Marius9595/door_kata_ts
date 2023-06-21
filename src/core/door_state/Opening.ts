@@ -25,7 +25,8 @@ export class Opening implements DoorState {
 		) {
 			this.door.changeState(new PausedOpening(this.door));
 			const restOfEvents = events.substring(index);
-			return eventsProcessed + this.door.processEvents(restOfEvents);
+			const lastEvent = eventsProcessed.split('')[eventsProcessed.length-1];
+			return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 		}
 
 		if (eventsProcessed.includes(open) && index < eventsToProcess.length) {
