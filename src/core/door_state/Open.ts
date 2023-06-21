@@ -1,6 +1,5 @@
 import { DoorState } from './DoorState';
 import { Door } from '../door';
-import { Opening } from './Opening';
 import { Closing } from './Closing';
 
 export class Open implements DoorState {

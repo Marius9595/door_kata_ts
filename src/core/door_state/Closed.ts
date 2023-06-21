@@ -1,6 +1,6 @@
 import { DoorState } from './DoorState';
 import { Door } from '../door';
-import { Opening } from "./Opening";
+import { Opening } from './Opening';
 
 export class Closed implements DoorState {
 	constructor(private door: Door) {}
@@ -9,7 +9,7 @@ export class Closed implements DoorState {
 		let index = 0;
 		let eventsProcessed = '';
 		const eventsToProcess = events.split('');
-		while (eventsToProcess[index] === '.' && index < eventsToProcess.length){
+		while (eventsToProcess[index] === '.' && index < eventsToProcess.length) {
 			eventsProcessed += '0';
 			index++;
 		}

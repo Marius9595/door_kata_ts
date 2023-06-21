@@ -1,4 +1,4 @@
-import { Door } from "../core/door";
+import { Door } from '../core/door';
 
 /*
 	CASES:
@@ -33,15 +33,13 @@ import { Door } from "../core/door";
 	 - when door is closing and an obstacle is detected, it will be started to open
 */
 
-
-
 describe('door', () => {
 	it('should start closed', function () {
-		expect(new Door().processEvents(".")).toBe("0");
+		expect(new Door().processEvents('.')).toBe('0');
 	});
 
 	it('should be close while button is not pressed', function () {
-		expect(new Door().processEvents("...")).toBe("000");
+		expect(new Door().processEvents('...')).toBe('000');
 	});
 
 	it('should start open when it is closed and button is pressed', function () {
@@ -49,14 +47,14 @@ describe('door', () => {
 	});
 
 	it('should be open after 5 seconds if button is not pressed or obstacule is not detected', function () {
-		expect(new Door().processEvents(".P....")).toBe("012345");
+		expect(new Door().processEvents('.P....')).toBe('012345');
 	});
 
 	it('should be open while button is not pressed', function () {
-		expect(new Door().processEvents(".P.....")).toBe("0123455");
+		expect(new Door().processEvents('.P.....')).toBe('0123455');
 	});
 
 	it('when it is open and button is pressed it should start to closing', function () {
-		expect(new Door().processEvents(".P.....P")).toBe("01234554");
+		expect(new Door().processEvents('.P.....P')).toBe('01234554');
 	});
 });
