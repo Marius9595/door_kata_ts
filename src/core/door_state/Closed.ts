@@ -10,7 +10,8 @@ export class Closed implements DoorState {
 		let eventsProcessed = '';
 		const eventsToProcess = events.split('');
 		while (eventsToProcess[index] === '.' && index < eventsToProcess.length) {
-			eventsProcessed += '0';
+			const closed = '0';
+			eventsProcessed += closed;
 			index++;
 		}
 
