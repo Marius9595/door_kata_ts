@@ -12,7 +12,7 @@ import { Door } from '../core/door';
 	 		".P...." -> "012345"
 	 - door will be open while button is not pressed ✅
 	 		".P....." -> "01234555"
-	 - when door is open and button is pressed it will start to close
+	 - when door is open and button is pressed it will start to close ✅
 	 		".P.....P" -> "01234554"
 	 - door will be closed after 5 seconds since button was pressed
 	 		".P.....P...." -> "012345543210"
@@ -56,5 +56,9 @@ describe('door', () => {
 
 	it('when it is open and button is pressed it should start to closing', function () {
 		expect(new Door().processEvents('.P.....P')).toBe('01234554');
+	});
+
+	it('should be closed after 5 seconds if button is not pressed or obstacule is not detected', function () {
+		expect(new Door().processEvents('.P.....P....')).toBe('012345543210');
 	});
 });
