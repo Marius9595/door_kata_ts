@@ -4,7 +4,7 @@ import { Door } from "../core/door";
 	CASES:
 	 - door is closed at the beginning ✅
 	 		"." -> "0"
-	 - door will be closed while button is not pressed
+	 - door will be closed while button is not pressed ✅
 	 		".." -> "00"
 	 - when door is closed and button is pressed it will start to open
 	 		".P" -> "01"
@@ -43,5 +43,10 @@ describe('door', () => {
 	it('should be close while button is not pressed', function () {
 		expect(new Door().processEvents("...")).toBe("000");
 	});
+
+	it('should start open when it is closed and button is pressed', function () {
+		expect(new Door().processEvents('.P')).toBe('01');
+	});
+
 });
 
