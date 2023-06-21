@@ -65,4 +65,8 @@ describe('door', () => {
 	it('when is opening and button is pressed it should be paused', function () {
 		expect(new Door().processEvents('.P.P')).toBe('0122');
 	});
+
+	it('when it was paused in opening and button is not pressed again it should keep paused', function () {
+		expect(new Door().processEvents('.P.P.....')).toBe('01222222');
+	});
 });
