@@ -6,7 +6,7 @@ import { Door } from "../core/door";
 	 		"." -> "0"
 	 - door will be closed while button is not pressed ✅
 	 		".." -> "00"
-	 - when door is closed and button is pressed it will start to open
+	 - when door is closed and button is pressed it will start to open ✅
 	 		".P" -> "01"
 	 - door will be open after 5 seconds since button was pressed
 	 		".P...." -> "012345"
@@ -46,6 +46,10 @@ describe('door', () => {
 
 	it('should start open when it is closed and button is pressed', function () {
 		expect(new Door().processEvents('.P')).toBe('01');
+	});
+
+	it('should be open after 5 seconds if button is not pressed or obstacule is not detected', function () {
+		expect(new Door().processEvents(".P....")).toBe("012345");
 	});
 
 });
