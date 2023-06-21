@@ -35,6 +35,7 @@
 import { Door } from "../core/door";
 
 describe('door', () => {
+
 	it('should start closed', function () {
 		expect(new Door().processEvents(".")).toBe("0");
 	});
