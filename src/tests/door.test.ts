@@ -14,7 +14,7 @@ import { Door } from '../core/door';
 	 		".P....." -> "01234555"
 	 - when door is open and button is pressed it will start to close ✅
 	 		".P.....P" -> "01234554"
-	 - door will be closed after 5 seconds since button was pressed
+	 - door will be closed after 5 seconds since button was pressed ✅
 	 		".P.....P...." -> "012345543210"
 	 - when door is opening and button is pressed it will be paused
 	 	 ".P.P." -> "0122"
@@ -27,7 +27,7 @@ import { Door } from '../core/door';
 	 - door will be paused during closing while button is not pressed
 	 	 ".P.....P.P....." -> "0123455432222"
 	 - when door is paused during closing and button is pressed it will continue to close
-	 			 	 ".P.....P.P.P" -> "01234554332"
+	 	 ".P.....P.P.P" -> "01234554332"
 	 - when door is opening and an obstacle is detected, it will be started to close
 	 	 ".P..O." -> "01232"
 	 - when door is closing and an obstacle is detected, it will be started to open
@@ -60,5 +60,9 @@ describe('door', () => {
 
 	it('should be closed after 5 seconds if button is not pressed or obstacule is not detected', function () {
 		expect(new Door().processEvents('.P.....P....')).toBe('012345543210');
+	});
+
+	it('when is opening and button is pressed it should be paused', function () {
+		expect(new Door().processEvents('.P.P')).toBe('0122');
 	});
 });
