@@ -5,6 +5,6 @@ export class Closed implements DoorState {
 	constructor(private door: Door) {}
 
 	processEvents(events: string): string {
-		return "";
+		return "0";
 	}
 }

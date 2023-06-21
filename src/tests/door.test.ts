@@ -1,3 +1,4 @@
+import { Door } from "../core/door";
 
 /*
 	CASES:
@@ -32,10 +33,9 @@
 	 - when door is closing and an obstacle is detected, it will be started to open
 */
 
-import { Door } from "../core/door";
+
 
 describe('door', () => {
-
 	it('should start closed', function () {
 		expect(new Door().processEvents(".")).toBe("0");
 	});
