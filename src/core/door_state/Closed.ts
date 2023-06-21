@@ -17,7 +17,8 @@ export class Closed implements DoorState {
 		const buttonWasPressed = 'P';
 		if (eventsToProcess[index] === buttonWasPressed) {
 			this.door.changeState(new Opening(this.door));
-			return eventsProcessed + this.door.processEvents(events.substring(index));
+			const restOfEvents = events.substring(index);
+			return eventsProcessed + this.door.processEvents(restOfEvents);
 		}
 
 		return eventsProcessed;
