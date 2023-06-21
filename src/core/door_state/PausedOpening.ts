@@ -1,5 +1,7 @@
 import { DoorState } from './DoorState';
 import { Door } from '../door';
+import { Open } from './Open';
+import { Opening } from './Opening';
 
 export class PausedOpening implements DoorState {
 	constructor(private door: Door) {}
@@ -16,6 +18,15 @@ export class PausedOpening implements DoorState {
 			eventsProcessed += lastEvent;
 			index++;
 		}
+
+		const buttonPressed = 'P';
+		if (events[index] === buttonPressed) {
+			this.door.changeState(new Opening(this.door));
+      const lastEvent = eventsProcessed.split('')[eventsProcessed.length-1];
+			const restOfEvents = events.substring(index);
+			return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
+		}
+
 		return eventsProcessed;
 	}
 }

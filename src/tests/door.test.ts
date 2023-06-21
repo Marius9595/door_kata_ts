@@ -20,7 +20,7 @@ import { Door } from '../core/door';
 	 	 ".P.P." -> "0122"
 	 - door will be paused during opening while button is not pressed ✅
 	 	 ".P.P....." -> "01222222"
-	 - when door is paused during opening and button is pressed it will continue to open
+	 - when door is paused during opening and button is pressed it will continue to open until it is fully open ✅
 	 	 ".P.P.....P" -> "01222223"
 	 - when door is closing and button is pressed it will be paused
 	 	 ".P.....P.P." -> "01234554322"
@@ -71,6 +71,6 @@ describe('door', () => {
 	});
 
 	it('when it is paused during opening and button is pressed it will continue to open', function () {
-		expect(new Door().processEvents('.P.P.....P')).toBe('01222223');
+		expect(new Door().processEvents('.P.P.....P')).toBe('012222223');
 	});
 });
