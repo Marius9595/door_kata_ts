@@ -9,7 +9,8 @@ export class Open implements DoorState {
 		let eventsProcessed = '';
 		const eventsToProcess = events.split('');
 		while (eventsToProcess[index] === '.' && index < eventsToProcess.length) {
-			eventsProcessed += '5';
+			const open = '5';
+			eventsProcessed += open;
 			index++;
 		}
 
