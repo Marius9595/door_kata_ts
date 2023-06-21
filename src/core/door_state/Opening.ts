@@ -15,7 +15,6 @@ export class Opening implements DoorState {
 		if (eventsToProcess[0] !== closed && eventsToProcess[0] !== 'P') {
 			const currentOpeningPosition = eventsToProcess[0];
 			eventsProcessed = (parseInt(currentOpeningPosition) + 1).toString();
-
 		} else {
 			const firstOpeningPosition = '1';
 			eventsProcessed = firstOpeningPosition;
