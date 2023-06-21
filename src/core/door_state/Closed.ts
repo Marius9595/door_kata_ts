@@ -8,12 +8,13 @@ export class Closed implements DoorState {
 	processEvents(events: string): string {
 		let index = 0;
 		let eventsProcessed = '';
-		while (events.split('')[index] === '.' && index < events.split('').length){
+		const eventsToProcess = events.split('');
+		while (eventsToProcess[index] === '.' && index < eventsToProcess.length){
 			eventsProcessed += '0';
 			index++;
 		}
 
-		if (events.split('')[index] === 'P') {
+		if (eventsToProcess[index] === 'P') {
 			this.door.changeState(new Opening(this.door));
 			return eventsProcessed + this.door.processEvents(events.substring(index));
 		}
