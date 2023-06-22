@@ -5,19 +5,20 @@ import { Closing } from "./Closing";
 export class Open implements DoorState {
 	constructor(private door: Door) {}
 	processEvents(events: string): string {
-		let index = 0;
+		let first = 0;
 		let eventsProcessed = '';
 		const eventsToProcess = events.split('');
-		while (eventsToProcess[index] === '.' && index < eventsToProcess.length) {
+
+		if(eventsToProcess[first] === '.') {
 			const open = '5';
 			eventsProcessed += open;
-			index++;
+			return eventsProcessed + this.door.processEvents(events.substring(first + 1));
 		}
 
-		const isButtonPressedEvent = eventsToProcess[index] === 'P';
+		const isButtonPressedEvent = eventsToProcess[first] === 'P';
 		if (isButtonPressedEvent) {
 			this.door.changeState(new Closing(this.door));
-			const restOfEvents = events.substring(index);
+			const restOfEvents = events.substring(first);
 			return eventsProcessed + this.door.processEvents(restOfEvents);
 		}
 
