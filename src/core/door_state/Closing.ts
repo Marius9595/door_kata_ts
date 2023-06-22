@@ -1,8 +1,8 @@
-import { DoorState } from "./DoorState";
-import { Door } from "../door";
-import { PausedClosing } from "./PausedClosing";
-import { Closed } from "./Closed";
-import { Opening } from "./Opening";
+import { DoorState } from './DoorState';
+import { Door } from '../door';
+import { PausedClosing } from './PausedClosing';
+import { Closed } from './Closed';
+import { Opening } from './Opening';
 
 export class Closing implements DoorState {
 	constructor(private door: Door) {}
@@ -23,36 +23,24 @@ export class Closing implements DoorState {
 			index++;
 		}
 
-
-		if(index < eventsToProcess.length){
-
+		if (index < eventsToProcess.length) {
 			const obstaculeDetectedEvent = eventsToProcess.includes('O');
 			const isClosedEvent = eventsProcessed.includes('0');
-			if (
-				obstaculeDetectedEvent &&
-				!isClosedEvent
-			) {
+			const restOfEvents = events.substring(index);
+			const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
+			if (obstaculeDetectedEvent && !isClosedEvent) {
 				this.door.changeState(new Opening(this.door));
-				const restOfEvents = events.substring(index);
-				const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
-				return eventsProcessed + this.door.processEvents(lastEvent.toString() + restOfEvents.substring(1));
+				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 			}
 			const buttonWasPressedEvent = eventsToProcess.includes('P');
-			if (
-				buttonWasPressedEvent &&
-				!isClosedEvent
-			) {
+			if (buttonWasPressedEvent && !isClosedEvent) {
 				this.door.changeState(new PausedClosing(this.door));
-				const restOfEvents = events.substring(index);
-				const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
 				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 			}
 
 			if (isClosedEvent) {
 				this.door.changeState(new Closed(this.door));
-				const restOfEvents = events.substring(index);
-				const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
-				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents);
+				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 			}
 		}
 
