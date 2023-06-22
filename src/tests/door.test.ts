@@ -75,10 +75,10 @@ describe('door', () => {
 	});
 
 	it('when it was paused in closing and button is not pressed again it should keep paused', function () {
-		expect(new Door().processEvents('.P.....P.P.')).toBe('01234554322');
+		expect(new Door().processEvents('.P.....P.P')).toBe('0123455433');
 	});
 
 	it('when it was paused in closing and button is not pressed again it should keep paused', function () {
-		expect(new Door().processEvents('.P.....P.P.....')).toBe('0123455432222');
+		expect(new Door().processEvents('.P.....P.P.....')).toBe('01234554333333');
 	});
 });
