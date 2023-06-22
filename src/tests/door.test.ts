@@ -24,7 +24,7 @@ import { Door } from '../core/door';
 	 	 ".P.P.....P" -> "01222223"
 	 - when door is closing and button is pressed it will be paused ✅
 	 	 ".P.....P.P." -> "01234554322"
-	 - door will be paused during closing while button is not pressed
+	 - door will be paused during closing while button is not pressed  ✅
 	 	 ".P.....P.P....." -> "0123455432222"
 	 - when door is paused during closing and button is pressed it will continue to close
 	 	 ".P.....P.P.P" -> "01234554332"
@@ -79,6 +79,10 @@ describe('door', () => {
 	});
 
 	it('when it was paused in closing and button is not pressed again it should keep paused', function () {
+		expect(new Door().processEvents('.P.....P.P.....')).toBe('01234554333333');
+	});
+
+	it('when it is paused during closing and button is pressed it will continue to close', function () {
 		expect(new Door().processEvents('.P.....P.P.....')).toBe('01234554333333');
 	});
 });
