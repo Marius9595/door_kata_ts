@@ -6,25 +6,25 @@ export class Closed implements DoorState {
 	constructor(private door: Door) {}
 
 	processEvents(events: string): string {
-		const firstElement = 0;
-		let eventsProcessed = '';
+		const first = 0;
+		let eventProcessed = '';
 		const eventsToProcess = events.split('');
-		const currentEventToEvaluate = eventsToProcess[firstElement];
+		const currentEventToEvaluate = eventsToProcess[first];
 
-		if (currentEventToEvaluate === '.') {
+		const isNoEvent = currentEventToEvaluate === '.';
+		const isButtonPressedEvent = currentEventToEvaluate === 'P';
+
+		if (isNoEvent) {
 			const closed = '0';
-			eventsProcessed += closed;
-			const restEventsToProcess = events.substring(firstElement + 1);
-			return eventsProcessed + this.door.processEvents(restEventsToProcess);
-		}
-
-		const buttonWasPressed = 'P';
-		if (currentEventToEvaluate === buttonWasPressed) {
+			eventProcessed += closed;
+			const restEventsToProcess = events.substring(first + 1);
+			return eventProcessed + this.door.processEvents(restEventsToProcess);
+		} else if (isButtonPressedEvent) {
 			this.door.changeState(new Opening(this.door));
-			const restOfEvents = events.substring(firstElement);
-			return eventsProcessed + this.door.processEvents(restOfEvents);
+			const restOfEvents = events.substring(first);
+			return eventProcessed + this.door.processEvents(restOfEvents);
+		} else {
+			return eventProcessed;
 		}
-
-		return eventsProcessed;
 	}
 }
