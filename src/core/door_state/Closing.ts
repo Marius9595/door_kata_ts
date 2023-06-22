@@ -24,10 +24,11 @@ export class Closing implements DoorState {
 		}
 
 		if (index < eventsToProcess.length) {
-			const obstacleDetectedEvent = eventsToProcess.includes('O');
-			const isClosedEvent = eventsProcessed.includes('0');
+
 			const restOfEvents = events.substring(index);
 			const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
+
+			const obstacleDetectedEvent = eventsToProcess.includes('O');
 			if (obstacleDetectedEvent) {
 				this.door.changeState(new Opening(this.door));
 				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
@@ -37,7 +38,7 @@ export class Closing implements DoorState {
 				this.door.changeState(new PausedClosing(this.door));
 				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 			}
-
+			const isClosedEvent = eventsProcessed.includes('0');
 			if (isClosedEvent) {
 				this.door.changeState(new Closed(this.door));
 				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
