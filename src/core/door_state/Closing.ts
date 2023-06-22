@@ -24,16 +24,16 @@ export class Closing implements DoorState {
 		}
 
 		if (index < eventsToProcess.length) {
-			const obstaculeDetectedEvent = eventsToProcess.includes('O');
+			const obstacleDetectedEvent = eventsToProcess.includes('O');
 			const isClosedEvent = eventsProcessed.includes('0');
 			const restOfEvents = events.substring(index);
 			const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
-			if (obstaculeDetectedEvent && !isClosedEvent) {
+			if (obstacleDetectedEvent) {
 				this.door.changeState(new Opening(this.door));
 				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 			}
 			const buttonWasPressedEvent = eventsToProcess.includes('P');
-			if (buttonWasPressedEvent && !isClosedEvent) {
+			if (buttonWasPressedEvent) {
 				this.door.changeState(new PausedClosing(this.door));
 				return eventsProcessed + this.door.processEvents(lastEvent + restOfEvents.substring(1));
 			}
