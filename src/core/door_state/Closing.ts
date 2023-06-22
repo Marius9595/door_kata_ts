@@ -4,6 +4,7 @@ import { Open } from './Open';
 import { PausedOpening } from "./PausedOpening";
 import { PausedClosing } from "./PausedClosing";
 import { Closed } from "./Closed";
+import { Opening } from "./Opening";
 
 export class Closing implements DoorState {
 	constructor(private door: Door) {}
@@ -17,6 +18,13 @@ export class Closing implements DoorState {
 		if (eventsToProcess[0] !== closed && eventsToProcess[0] !== 'P') {
 			const currentOpeningPosition = eventsToProcess[0];
 			eventsProcessed = (parseInt(currentOpeningPosition) - 1).toString();
+			if(eventsToProcess.length>1){
+				while (eventsToProcess[index] === '.' && index < eventsToProcess.length && !eventsProcessed.includes(open)) {
+					const nextOpeningPosition = (4 - index).toString();
+					eventsProcessed += nextOpeningPosition;
+					index++;
+				}
+			}
 		} else {
 			const firstOpeningPosition = '4';
 			eventsProcessed = firstOpeningPosition;
@@ -25,6 +33,14 @@ export class Closing implements DoorState {
 				eventsProcessed += nextOpeningPosition;
 				index++;
 			}
+		}
+
+		const obstacleDetected = 'O';
+		if (eventsToProcess.includes(obstacleDetected) && index < eventsToProcess.length && !eventsProcessed.includes(closed)) {
+			this.door.changeState(new Opening(this.door));
+			const restOfEvents = events.substring(index);
+			const lastEvent = eventsProcessed.split('')[eventsProcessed.length - 1];
+			return eventsProcessed + this.door.processEvents(lastEvent.toString() + restOfEvents.substring(1));
 		}
 
 		const buttonPressed = 'P';

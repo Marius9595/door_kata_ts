@@ -28,9 +28,10 @@ import { Door } from '../core/door';
 	 	 ".P.....P.P....." -> "0123455432222"
 	 - when door is paused during closing and button is pressed it will continue to close ✅
 	 	 ".P.....P.P.P" -> "01234554332"
-	 - when door is opening and an obstacle is detected, it will be started to close
+	 - when door is opening and an obstacle is detected, it will be started to close ✅
 	 	 ".P..O." -> "01232"
 	 - when door is closing and an obstacle is detected, it will be started to open
+	 	 ".P.....P.O." -> "01234554345"
 */
 
 describe('door', () => {
@@ -86,7 +87,11 @@ describe('door', () => {
 		expect(new Door().processEvents('.P.....P.P.....')).toBe('01234554333333');
 	});
 
-	it('when it is opening and an obstacle is detected, it will be started to close', function () {
-		expect(new Door().processEvents('.P..O.')).toBe('01232');
+	it('when it is opening and an obstacle is detected, it will start to close', function () {
+		expect(new Door().processEvents('.P..O.')).toBe('012323');
+	});
+
+	it('when it is closing and an obstacle is detected, it will start to open', function () {
+		expect(new Door().processEvents('.P.....P.O.')).toBe('01234554345');
 	});
 });

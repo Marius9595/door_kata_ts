@@ -3,6 +3,7 @@ import { Door } from '../door';
 import { Open } from './Open';
 import { PausedOpening } from './PausedOpening';
 import { Closing } from "./Closing";
+import { partChanged } from "npm-check-updates/build/src/lib/version-util";
 
 export class Opening implements DoorState {
 	constructor(private door: Door) {}
@@ -16,6 +17,13 @@ export class Opening implements DoorState {
 		if (eventsToProcess[0] !== closed && eventsToProcess[0] !== 'P') {
 			const currentOpeningPosition = eventsToProcess[0];
 			eventsProcessed = (parseInt(currentOpeningPosition) + 1).toString();
+			if(eventsToProcess.length>1){
+				while (eventsToProcess[index] === '.' && index < eventsToProcess.length && !eventsProcessed.includes(open)) {
+					const nextOpeningPosition = (parseInt(currentOpeningPosition)+index +1).toString();
+					eventsProcessed += nextOpeningPosition;
+					index++;
+				}
+			}
 		} else {
 			const firstOpeningPosition = '1';
 			eventsProcessed = firstOpeningPosition;
