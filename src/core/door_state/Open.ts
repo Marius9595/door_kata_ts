@@ -10,19 +10,18 @@ export class Open implements DoorState {
 		const eventsToProcess = events.split('');
 
 		const isNoEvent = eventsToProcess[first] === '.';
+		const isButtonPressedEvent = eventsToProcess[first] === 'P';
+
 		if (isNoEvent) {
 			const open = '5';
 			eventsProcessed += open;
 			return eventsProcessed + this.door.processEvents(events.substring(first + 1));
-		}
-
-		const isButtonPressedEvent = eventsToProcess[first] === 'P';
-		if (isButtonPressedEvent) {
+		} else if (isButtonPressedEvent) {
 			this.door.changeState(new Closing(this.door));
 			const restOfEvents = events.substring(first);
 			return eventsProcessed + this.door.processEvents(restOfEvents);
+		} else {
+			return eventsProcessed;
 		}
-
-		return eventsProcessed;
 	}
 }
