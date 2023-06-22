@@ -18,21 +18,14 @@ export class Closing implements DoorState {
 		if (eventsToProcess[0] !== closed && eventsToProcess[0] !== 'P') {
 			const currentOpeningPosition = eventsToProcess[0];
 			eventsProcessed = (parseInt(currentOpeningPosition) - 1).toString();
-			if(eventsToProcess.length>1){
-				while (eventsToProcess[index] === '.' && index < eventsToProcess.length && !eventsProcessed.includes(open)) {
-					const nextOpeningPosition = (4 - index).toString();
-					eventsProcessed += nextOpeningPosition;
-					index++;
-				}
-			}
 		} else {
 			const firstOpeningPosition = '4';
 			eventsProcessed = firstOpeningPosition;
-			while (eventsToProcess[index] === '.' && index < eventsToProcess.length && !eventsProcessed.includes(open)) {
-				const nextOpeningPosition = (4 - index).toString();
-				eventsProcessed += nextOpeningPosition;
-				index++;
-			}
+		}
+		while (eventsToProcess[index] === '.' && index < eventsToProcess.length && !eventsProcessed.includes(open)) {
+			const nextOpeningPosition = (4 - index).toString();
+			eventsProcessed += nextOpeningPosition;
+			index++;
 		}
 
 		const obstacleDetected = 'O';
