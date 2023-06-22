@@ -1,6 +1,6 @@
-import { DoorState } from './DoorState';
-import { Door } from '../door';
-import { Closing } from './Closing';
+import { DoorState } from "./DoorState";
+import { Door } from "../door";
+import { Closing } from "./Closing";
 
 export class Open implements DoorState {
 	constructor(private door: Door) {}
@@ -14,8 +14,8 @@ export class Open implements DoorState {
 			index++;
 		}
 
-		const buttonWasPressed = 'P';
-		if (eventsToProcess[index] === buttonWasPressed) {
+		const isButtonPressedEvent = eventsToProcess[index] === 'P';
+		if (isButtonPressedEvent) {
 			this.door.changeState(new Closing(this.door));
 			const restOfEvents = events.substring(index);
 			return eventsProcessed + this.door.processEvents(restOfEvents);
